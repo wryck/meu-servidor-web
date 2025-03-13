@@ -53,6 +53,8 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 300px;
             margin: 30px auto;
+            opacity: 0; /* Inicialmente invisível */
+            transition: opacity 0.5s ease; /* Transição de opacidade */
         }
 
         .win {
@@ -84,9 +86,6 @@
         <p id="game-info"></p>
         <p id="result"></p>
     </div>
-    <div>
-        <img src="https://pepeladeira.github.io/rock-paper-or-scissors/pedra-papel-tesoura.png">
-    </div>
 
     <script>
         function playGame(userChoice) {
@@ -113,7 +112,13 @@
                 resultElement.textContent = "Computador venceu!";
                 resultElement.className = "lose";
             }
+
+            // Ativa a animação
+            resultContainer.style.opacity = 1;
         }
     </script>
+     <div>
+        <img src="https://pepeladeira.github.io/rock-paper-or-scissors/pedra-papel-tesoura.png">
+    </div>
 </body>
 </html>
