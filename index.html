@@ -1,61 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock, Paper, Scissors</title>
+    <title>Pedra, Papel, Tesoura</title>
     <style>
         body {
             text-align: center;
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        
+
         h1 {
             color: #333;
+            margin-top: 50px;
         }
-        
+
         #choices {
-            margin-top: 20px;
+            margin-top: 30px;
         }
-        
+
         button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
-        #result {
-            margin-top: 20px;
+            margin: 10px;
+            padding: 15px 30px;
             font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004085;
+        }
+
+        #result-container {
+            margin-top: 30px;
+            font-size: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 30px auto;
+        }
+
+        .win {
+            color: green;
+        }
+
+        .lose {
+            color: red;
+        }
+
+        .tie {
+            color: orange;
+        }
+
+        #game-info {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Rock, Paper, Scissors</h1>
-    <p>Select your choice:</p>
+    <h1>Pedra, Papel, Tesoura</h1>
+    <p>Escolha:</p>
     <div id="choices">
-        <button onclick="playGame('rock')">Rock</button>
-        <button onclick="playGame('paper')">Paper</button>
-        <button onclick="playGame('scissors')">Scissors</button>
+        <button onclick="playGame('pedra')">Pedra</button>
+        <button onclick="playGame('papel')">Papel</button>
+        <button onclick="playGame('tesoura')">Tesoura</button>
     </div>
-    <p id="result"></p>
+    <div id="result-container">
+        <p id="game-info"></p>
+        <p id="result"></p>
+    </div>
 
     <script>
         function playGame(userChoice) {
-            var choices = ['rock', 'paper', 'scissors'];
+            var choices = ['pedra', 'papel', 'tesoura'];
             var randomIndex = Math.floor(Math.random() * choices.length);
             var computerChoice = choices[randomIndex];
-            var result = document.getElementById("result");
-            
+            var resultElement = document.getElementById("result");
+            var gameInfoElement = document.getElementById("game-info");
+            var resultContainer = document.getElementById("result-container");
+
+            gameInfoElement.textContent = `Você escolheu: ${userChoice}. Computador escolheu: ${computerChoice}.`;
+
             if (userChoice === computerChoice) {
-                result.textContent = "It's a tie!";
+                resultElement.textContent = "Empate!";
+                resultElement.className = "tie";
             } else if (
-                (userChoice === 'rock' && computerChoice === 'scissors') ||
-                (userChoice === 'paper' && computerChoice === 'rock') ||
-                (userChoice === 'scissors' && computerChoice === 'paper')
+                (userChoice === 'pedra' && computerChoice === 'tesoura') ||
+                (userChoice === 'papel' && computerChoice === 'pedra') ||
+                (userChoice === 'tesoura' && computerChoice === 'papel')
             ) {
-                result.textContent = "You win!";
+                resultElement.textContent = "Você venceu!";
+                resultElement.className = "win";
             } else {
-                result.textContent = "Computer wins!";
+                resultElement.textContent = "Computador venceu!";
+                resultElement.className = "lose";
             }
         }
     </script>
