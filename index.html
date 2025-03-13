@@ -53,8 +53,8 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 300px;
             margin: 30px auto;
-            opacity: 0; /* Inicialmente invisível */
-            transition: opacity 0.5s ease; /* Transição de opacidade */
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .win {
@@ -96,29 +96,36 @@
             var gameInfoElement = document.getElementById("game-info");
             var resultContainer = document.getElementById("result-container");
 
-            gameInfoElement.textContent = `Você escolheu: ${userChoice}. Computador escolheu: ${computerChoice}.`;
+            // Mostra a escolha do usuário imediatamente
+            gameInfoElement.textContent = `Você escolheu: ${userChoice}.`;
 
-            if (userChoice === computerChoice) {
-                resultElement.textContent = "Empate!";
-                resultElement.className = "tie";
-            } else if (
-                (userChoice === 'pedra' && computerChoice === 'tesoura') ||
-                (userChoice === 'papel' && computerChoice === 'pedra') ||
-                (userChoice === 'tesoura' && computerChoice === 'papel')
-            ) {
-                resultElement.textContent = "Você venceu!";
-                resultElement.className = "win";
-            } else {
-                resultElement.textContent = "Computador venceu!";
-                resultElement.className = "lose";
-            }
+            // Adiciona um delay antes de mostrar a escolha do computador e o resultado
+            setTimeout(function() {
+                gameInfoElement.textContent += ` Computador escolheu: ${computerChoice}.`;
 
-            // Ativa a animação
-            resultContainer.style.opacity = 1;
+                if (userChoice === computerChoice) {
+                    resultElement.textContent = "Empate!";
+                    resultElement.className = "tie";
+                } else if (
+                    (userChoice === 'pedra' && computerChoice === 'tesoura') ||
+                    (userChoice === 'papel' && computerChoice === 'pedra') ||
+                    (userChoice === 'tesoura' && computerChoice === 'papel')
+                ) {
+                    resultElement.textContent = "Você venceu!";
+                    resultElement.className = "win";
+                } else {
+                    resultElement.textContent = "Computador venceu!";
+                    resultElement.className = "lose";
+                }
+
+                resultContainer.style.opacity = 1; // Ativa a animação
+            }, 1000); // Delay de 1 segundo (1000 milissegundos)
         }
     </script>
-     <div>
+    <div>
         <img src="https://pepeladeira.github.io/rock-paper-or-scissors/pedra-papel-tesoura.png">
     </div>
 </body>
 </html>
+     
+
